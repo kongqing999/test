@@ -1,0 +1,14 @@
+name: Secret Leak Demo222
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Multiline log secret
+        env:
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+        run: |
+          echo "AWS key:"
+          printf "%s\n" "$AWS_SECRET_ACCESS_KEY" | fold -w 10
