@@ -1,0 +1,13 @@
+name: Secret Leak Demo
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run tests
+        env:
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+        run: |
+          node -e "console.log('Config:', JSON.stringify(process.env, null, 2))"
